@@ -1,5 +1,6 @@
 package com.tenclouds.fluidbottomnavigationexample
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -13,7 +14,8 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         fluidBottomNavigation.accentColor = ContextCompat.getColor(this, R.color.colorPrimaryDark)
-        fluidBottomNavigation.backColor = ContextCompat.getColor(this, R.color.colorPrimaryDark)
+        fluidBottomNavigation.backColor = Color.parseColor("#3f3f3f")
+        fluidBottomNavigation.selectorColor = Color.parseColor("#00000000")
         fluidBottomNavigation.textColor = ContextCompat.getColor(this, R.color.colorPrimaryDark)
         fluidBottomNavigation.iconColor = ContextCompat.getColor(this, R.color.colorPrimary)
         fluidBottomNavigation.iconSelectedColor = ContextCompat.getColor(this, R.color.iconSelectedColor)

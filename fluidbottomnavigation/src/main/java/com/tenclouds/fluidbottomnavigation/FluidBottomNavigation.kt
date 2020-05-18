@@ -15,8 +15,10 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.LinearLayout
 import androidx.annotation.VisibleForTesting
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.graphics.drawable.DrawableCompat
 import com.tenclouds.fluidbottomnavigation.extension.calculateHeight
 import com.tenclouds.fluidbottomnavigation.extension.setTintColor
 import com.tenclouds.fluidbottomnavigation.listener.OnTabSelectedListener
@@ -50,6 +52,7 @@ class FluidBottomNavigation : FrameLayout {
 
     var accentColor: Int = ContextCompat.getColor(context, R.color.accentColor)
     var backColor: Int = ContextCompat.getColor(context, R.color.backColor)
+    var selectorColor: Int = ContextCompat.getColor(context, R.color.backColor)
     var iconColor: Int = ContextCompat.getColor(context, R.color.textColor)
     var iconSelectedColor: Int = ContextCompat.getColor(context, R.color.iconColor)
     var textColor: Int = ContextCompat.getColor(context, R.color.iconSelectedColor)
@@ -204,7 +207,13 @@ class FluidBottomNavigation : FrameLayout {
                 setTintColor(accentColor)
             }
 
-            backgroundContainer.setOnClickListener {
+            val unwrappedDrawable = AppCompatResources.getDrawable(context, R.drawable.top)
+            val wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable!!)
+            DrawableCompat.setTint(wrappedDrawable, selectorColor)
+
+            //topContainer.setBackgroundColor(backColor)
+            backgroundContainer.setBackgroundColor(backColor)
+            backgroundContainer.setOnClickListener {//todo
                 val nowTimestamp = SystemClock.uptimeMillis()
                 if (abs(lastItemClickTimestamp - nowTimestamp) > ITEMS_CLICKS_DEBOUNCE) {
                     selectTab(position)

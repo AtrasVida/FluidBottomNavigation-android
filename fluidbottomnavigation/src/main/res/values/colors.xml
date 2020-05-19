@@ -4,5 +4,5 @@
     <color name="backColor">#6600ff</color>
     <color name="textColor">#303F9F</color>
     <color name="iconColor">#3F51B5</color>
-    <color name="iconSelectedColor">#ff00ff</color>
+    <color name="iconSelectedColor">#00ff00ff</color>
 </resources>

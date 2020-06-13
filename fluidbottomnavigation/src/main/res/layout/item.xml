@@ -20,14 +20,14 @@
             />
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/backgroundContainer"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/fluidBottomNavigationHeight"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            android:layout_marginTop="@dimen/fluidBottomNavigationBackgroundMarginTop"
-            />
+        android:id="@+id/backgroundContainer"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/fluidBottomNavigationHeight"
+        android:layout_marginTop="28dp"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.tenclouds.fluidbottomnavigation.view.RectangleView
             android:id="@+id/rectangle"
@@ -74,5 +74,21 @@
             app:layout_constraintRight_toRightOf="parent"
             android:textSize="@dimen/fluidBottomNavigationTextSize"
             tools:text="Label One"/>
+
+    <TextView
+        android:id="@+id/notif"
+        android:layout_width="wrap_content"
+        android:layout_height="0dp"
+        android:background="@drawable/fluidbottomnavigation_notif_bg"
+        android:gravity="center"
+        android:paddingLeft="6dp"
+        android:paddingRight="6dp"
+        android:text="6"
+        android:textColor="@color/colorWhite"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/icon"
+        app:layout_constraintDimensionRatio="h,1:1"
+        app:layout_constraintEnd_toStartOf="@+id/icon"
+        tools:visibility="visible" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

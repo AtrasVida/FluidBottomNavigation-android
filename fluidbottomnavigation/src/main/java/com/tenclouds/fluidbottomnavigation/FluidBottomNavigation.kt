@@ -23,7 +23,6 @@ import com.tenclouds.fluidbottomnavigation.extension.calculateHeight
 import com.tenclouds.fluidbottomnavigation.extension.setTintColor
 import com.tenclouds.fluidbottomnavigation.listener.OnTabSelectedListener
 import kotlinx.android.synthetic.main.item.view.*
-import java.lang.Exception
 import kotlin.math.abs
 
 class FluidBottomNavigation : FrameLayout {
@@ -140,7 +139,8 @@ class FluidBottomNavigation : FrameLayout {
                 .let { linearLayoutContainer ->
                     try {
                         linearLayoutContainer.setBackgroundResource(backRes)
-                    }catch (e:Exception){}
+                    } catch (e: Exception) {
+                    }
 
                     val layoutParams =
                             LayoutParams(
@@ -155,6 +155,13 @@ class FluidBottomNavigation : FrameLayout {
                 }
 
 
+    }
+
+   public fun setItemNotification(itemPosition: Int, notifCunt: Int?) {
+        if (notifCunt != null) {
+           views[itemPosition]. notif.text = "" + notifCunt
+            views[itemPosition].notif.visibility = View.VISIBLE
+        } else  views[itemPosition]. notif.visibility = View.GONE
     }
 
     private fun drawItemsViews(linearLayout: LinearLayout) {

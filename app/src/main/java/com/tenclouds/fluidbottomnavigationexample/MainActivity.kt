@@ -1,6 +1,7 @@
 package com.tenclouds.fluidbottomnavigationexample
 
 import android.os.Bundle
+import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import com.tenclouds.fluidbottomnavigation.FluidBottomNavigationItem
@@ -40,5 +41,9 @@ class MainActivity : AppCompatActivity() {
                         FluidBottomNavigationItem(
                                 getString(R.string.profile),
                                 ContextCompat.getDrawable(this, R.drawable.ic_profile)))
+
+        Handler().postDelayed({ fluidBottomNavigation.setItemNotification(0,5)},5000)
+
     }
+
 }

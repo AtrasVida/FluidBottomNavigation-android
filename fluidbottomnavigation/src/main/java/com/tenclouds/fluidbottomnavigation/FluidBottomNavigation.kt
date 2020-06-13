@@ -23,6 +23,7 @@ import com.tenclouds.fluidbottomnavigation.extension.calculateHeight
 import com.tenclouds.fluidbottomnavigation.extension.setTintColor
 import com.tenclouds.fluidbottomnavigation.listener.OnTabSelectedListener
 import kotlinx.android.synthetic.main.item.view.*
+import java.lang.Exception
 import kotlin.math.abs
 
 class FluidBottomNavigation : FrameLayout {
@@ -51,8 +52,10 @@ class FluidBottomNavigation : FrameLayout {
     var onTabSelectedListener: OnTabSelectedListener? = null
 
     var accentColor: Int = ContextCompat.getColor(context, R.color.accentColor)
-    var backColor: Int = ContextCompat.getColor(context, R.color.backColor)
+    var itemBackRes: Int = ContextCompat.getColor(context, R.color.backColor)
+    var backRes: Int = ContextCompat.getColor(context, R.color.backColor)
     var selectorColor: Int = ContextCompat.getColor(context, R.color.backColor)
+    var selectorBg: Int = ContextCompat.getColor(context, R.color.backColor)
     var iconColor: Int = ContextCompat.getColor(context, R.color.textColor)
     var iconSelectedColor: Int = ContextCompat.getColor(context, R.color.iconColor)
     var textColor: Int = ContextCompat.getColor(context, R.color.iconSelectedColor)
@@ -135,6 +138,10 @@ class FluidBottomNavigation : FrameLayout {
                     gravity = Gravity.CENTER
                 }
                 .let { linearLayoutContainer ->
+                    try {
+                        linearLayoutContainer.setBackgroundResource(backRes)
+                    }catch (e:Exception){}
+
                     val layoutParams =
                             LayoutParams(
                                     ViewGroup.LayoutParams.MATCH_PARENT,
@@ -146,6 +153,8 @@ class FluidBottomNavigation : FrameLayout {
                         drawItemsViews(linearLayoutContainer)
                     }
                 }
+
+
     }
 
     private fun drawItemsViews(linearLayout: LinearLayout) {
@@ -159,15 +168,10 @@ class FluidBottomNavigation : FrameLayout {
         val itemViewWidth = (bottomBarWidth / items.size)
 
         for (itemPosition in items.indices) {
-            inflater
-                    .inflate(R.layout.item, this, false)
+            inflater.inflate(R.layout.item, this, false)
                     .let {
                         views.add(it)
-                        linearLayout
-                                .addView(it,
-                                        LayoutParams(
-                                                itemViewWidth,
-                                                itemViewHeight.toInt()))
+                        linearLayout.addView(it, LayoutParams(itemViewWidth, itemViewHeight.toInt()))
                     }
             drawItemView(itemPosition)
         }
@@ -201,19 +205,22 @@ class FluidBottomNavigation : FrameLayout {
                         resources.getDimension(R.dimen.fluidBottomNavigationTextSize))
             }
             with(circle) {
-                setTintColor(accentColor)
+                setTintColor(selectorColor)
+                setBackgroundResource(selectorBg)
             }
             with(rectangle) {
-                setTintColor(accentColor)
+                setTintColor(selectorColor)
+                setBackgroundResource(selectorBg)
             }
 
             val unwrappedDrawable = AppCompatResources.getDrawable(context, R.drawable.top)
             val wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable!!)
-            DrawableCompat.setTint(wrappedDrawable, selectorColor)
+            //DrawableCompat.setTint(wrappedDrawable, selectorColor)
 
             //topContainer.setBackgroundColor(backColor)
-            backgroundContainer.setBackgroundColor(backColor)
-            backgroundContainer.setOnClickListener {//todo
+            backgroundContainer.setBackgroundResource(itemBackRes)
+            backgroundContainer.setOnClickListener {
+                //todo
                 val nowTimestamp = SystemClock.uptimeMillis()
                 if (abs(lastItemClickTimestamp - nowTimestamp) > ITEMS_CLICKS_DEBOUNCE) {
                     selectTab(position)
@@ -238,7 +245,7 @@ class FluidBottomNavigation : FrameLayout {
                 accentColor = getColor(
                         R.styleable.FluidBottomNavigation_accentColor,
                         ContextCompat.getColor(context, R.color.accentColor))
-                backColor = getColor(
+                itemBackRes = getColor(
                         R.styleable.FluidBottomNavigation_backColor,
                         ContextCompat.getColor(context, R.color.backColor))
                 iconColor = getColor(

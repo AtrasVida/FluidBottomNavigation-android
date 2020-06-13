@@ -5,4 +5,25 @@
     <color name="textColor">#303F9F</color>
     <color name="iconColor">#3F51B5</color>
     <color name="iconSelectedColor">#00ff00ff</color>
+
+    <color name="colorPrimary">#f1f5ff</color>
+    <color name="colorPrimaryDark">#909090</color>
+    <color name="colorAccent">#ed4c4c</color>
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorWhiteTwo">#fefefe</color>
+    <color name="colorWhiteFour">#fbfafa</color>
+    <color name="colorWarmGreyTwo">#979797</color>
+    <color name="colorBrownishGrey">#8b8c8c</color>
+    <color name="colorPastelRed">#df6053</color>
+    <color name="colorTomato">#ed4c4c</color>
+    <color name="colorMaize">#f1b16b</color>
+    <color name="colorLightNavy">#122765</color>
+    <color name="colorWarmGreyThree">#909090</color>
+    <color name="colorIceBlue">#f8faff</color>
+    <color name="colorIceBlueTwo">#f1f5ff</color>
+    <color name="colorVeryLightBlue">#f8faff</color>
+    <color name="colorTwilightBlue">#0b2669</color>
+    <color name="colorFadedOrange">#f0b06b</color>
+    <color name="colorGreen">#189629</color>
+    <color name="colorFullAlpha">#00000000</color>
 </resources>

@@ -1,6 +1,5 @@
 package com.tenclouds.fluidbottomnavigationexample
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
@@ -13,12 +12,16 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        fluidBottomNavigation.accentColor = ContextCompat.getColor(this, R.color.colorPrimaryDark)
-        fluidBottomNavigation.backColor = Color.parseColor("#3f3f3f")
-        fluidBottomNavigation.selectorColor = Color.parseColor("#00000000")
-        fluidBottomNavigation.textColor = ContextCompat.getColor(this, R.color.colorPrimaryDark)
-        fluidBottomNavigation.iconColor = ContextCompat.getColor(this, R.color.colorPrimary)
-        fluidBottomNavigation.iconSelectedColor = ContextCompat.getColor(this, R.color.iconSelectedColor)
+        fluidBottomNavigation.accentColor = ContextCompat.getColor(this, R.color.colorWhite)
+        //fluidBottomNavigation.backRes = R.drawable.fluidbottomnavigationexample_shadow32dpi3
+        fluidBottomNavigation.itemBackRes = ContextCompat.getColor(this, R.color.colorFullAlpha)//R.drawable.bottom_navigation_bg
+        fluidBottomNavigation.selectorColor = ContextCompat.getColor(this, R.color.colorFullAlpha)
+        fluidBottomNavigation.selectorBg = R.drawable.fluidbottomnavigationexample_shadow32dpi3
+        fluidBottomNavigation.textColor = ContextCompat.getColor(this, R.color.colorLightNavy)
+        fluidBottomNavigation.iconColor = ContextCompat.getColor(this, R.color.colorWarmGreyTwo)
+        fluidBottomNavigation.iconSelectedColor =
+                ContextCompat.getColor(this, R.color.colorLightNavy)
+
 
         fluidBottomNavigation.items =
                 listOf(

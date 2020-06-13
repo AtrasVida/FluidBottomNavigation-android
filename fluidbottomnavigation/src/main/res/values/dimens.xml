@@ -6,8 +6,8 @@
     <dimen name="fluidBottomNavigationTopContainerMarginLeftRight">1dp</dimen>
     <dimen name="fluidBottomNavigationTopContainerWidth">88dp</dimen>
 
-    <dimen name="fluidBottomNavigationCircleSize">36dp</dimen>
-    <dimen name="fluidBottomNavigationIconSize">18dp</dimen>
+    <dimen name="fluidBottomNavigationCircleSize">48dp</dimen>
+    <dimen name="fluidBottomNavigationIconSize">24dp</dimen>
 
     <dimen name="fluidBottomNavigationCircleMarginTop">37dp</dimen>
     <dimen name="fluidBottomNavigationIconMarginTop">46dp</dimen>

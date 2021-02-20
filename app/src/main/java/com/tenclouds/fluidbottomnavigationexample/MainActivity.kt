@@ -13,11 +13,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        //fluidBottomNavigation.isInsideMode = true
         fluidBottomNavigation.accentColor = ContextCompat.getColor(this, R.color.colorWhite)
         //fluidBottomNavigation.backRes = R.drawable.fluidbottomnavigationexample_shadow32dpi3
         fluidBottomNavigation.itemBackRes = ContextCompat.getColor(this, R.color.colorFullAlpha)//R.drawable.bottom_navigation_bg
         fluidBottomNavigation.selectorColor = ContextCompat.getColor(this, R.color.colorFullAlpha)
-        fluidBottomNavigation.selectorBg = R.drawable.fluidbottomnavigationexample_shadow32dpi3
+        //fluidBottomNavigation.selectorBg = R.drawable.fluidbottomnavigationexample_shadow32dpi3
+        fluidBottomNavigation.selectorBg = R.drawable.shadow4dpi
         fluidBottomNavigation.textColor = ContextCompat.getColor(this, R.color.colorLightNavy)
         fluidBottomNavigation.iconColor = ContextCompat.getColor(this, R.color.colorWarmGreyTwo)
         fluidBottomNavigation.iconSelectedColor =
@@ -42,7 +44,7 @@ class MainActivity : AppCompatActivity() {
                                 getString(R.string.profile),
                                 ContextCompat.getDrawable(this, R.drawable.ic_profile)))
 
-        Handler().postDelayed({ fluidBottomNavigation.setItemNotification(0,5)},5000)
+        Handler().postDelayed({ fluidBottomNavigation.setItemNotification(3,5)},5000)
 
     }
 

@@ -6,12 +6,12 @@ import com.tenclouds.fluidbottomnavigation.R
 
 internal interface AnimatedView {
 
-    val selectAnimator: Animator
-    val deselectAnimator: Animator
+    fun selectAnimator(): Animator
+    fun deselectAnimator(): Animator
 
-    fun getItemTransitionYValue(context: Context) =
-            -(context.resources?.getDimension(R.dimen.fluidBottomNavigationItemTranslationY) ?: 0f)
+    fun getItemTransitionYValue(context: Context,isInsideMode:Boolean) =
+            -(context.resources?.getDimension(if(!isInsideMode) R.dimen.fluidBottomNavigationItemTranslationY else R.dimen.fluidBottomNavigationItemTranslationYInsideMode) ?: 0f)
 
-    fun getItemOvershootTransitionYValue(context: Context) =
-            getItemTransitionYValue(context) * 11 / 10
+    fun getItemOvershootTransitionYValue(context: Context,isInsideMode:Boolean) =
+            getItemTransitionYValue(context,isInsideMode) * 11 / 10
 }

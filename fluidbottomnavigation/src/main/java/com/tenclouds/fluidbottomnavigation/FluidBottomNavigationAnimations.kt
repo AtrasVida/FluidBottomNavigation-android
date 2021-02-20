@@ -5,28 +5,44 @@ import android.view.View
 import androidx.interpolator.view.animation.LinearOutSlowInInterpolator
 import com.tenclouds.fluidbottomnavigation.extension.translationYAnimator
 import kotlinx.android.synthetic.main.item.view.*
+import kotlinx.android.synthetic.main.item.view.circle
+import kotlinx.android.synthetic.main.item.view.icon
+import kotlinx.android.synthetic.main.item.view.title
+import kotlinx.android.synthetic.main.item_inside.view.*
 
-internal fun View.animateSelectItemView() =
+
+internal fun View.animateSelectItemView(isInsideMode: Boolean) =
         AnimatorSet()
                 .apply {
-                    playTogether(
-                            circle.selectAnimator,
-                            icon.selectAnimator,
-                            title.selectAnimator,
-                            rectangle.selectAnimator,
-                            topContainer.selectAnimator)
+                    if (isInsideMode) playTogether(
+                            circle.selectAnimator(),
+                            icon.selectAnimator(),
+                            iconContainer.selectAnimator()
+
+                    ) else
+                        playTogether(
+                                circle.selectAnimator(),
+                                icon.selectAnimator(),
+                                title.selectAnimator(),
+                                rectangle.selectAnimator(),
+                                topContainer.selectAnimator())
                 }
                 .start()
 
-internal fun View.animateDeselectItemView() =
+internal fun View.animateDeselectItemView(isInsideMode: Boolean) =
         AnimatorSet()
                 .apply {
-                    playTogether(
-                            circle.deselectAnimator,
-                            icon.deselectAnimator,
-                            title.deselectAnimator,
-                            rectangle.deselectAnimator,
-                            topContainer.deselectAnimator)
+                    if (isInsideMode) playTogether(
+                            circle.deselectAnimator(),
+                            icon.deselectAnimator(),
+                            iconContainer.deselectAnimator()
+                    )
+                    else playTogether(
+                            circle.deselectAnimator(),
+                            icon.deselectAnimator(),
+                            title.deselectAnimator(),
+                            rectangle.deselectAnimator(),
+                            topContainer.deselectAnimator())
                 }
                 .start()
 

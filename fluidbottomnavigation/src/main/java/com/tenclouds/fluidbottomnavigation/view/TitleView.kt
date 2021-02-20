@@ -15,23 +15,23 @@ internal class TitleView @JvmOverloads constructor(context: Context,
                                                    defStyleAttr: Int = 0)
     : AppCompatTextView(context, attrs, defStyleAttr), AnimatedView {
 
-    override val selectAnimator by lazy {
+    override fun selectAnimator ()=
         AnimatorSet()
                 .apply {
                     playTogether(
                             selectMoveAnimator,
                             selectAlphaAnimator)
                 }
-    }
 
-    override val deselectAnimator by lazy {
+
+    override fun deselectAnimator ()=
         AnimatorSet()
                 .apply {
                     playTogether(
                             deselectMoveAnimator,
                             deselectAlphaAnimator)
                 }
-    }
+
 
     private val selectMoveAnimator =
             AnimatorSet()
@@ -39,12 +39,12 @@ internal class TitleView @JvmOverloads constructor(context: Context,
                         playSequentially(
                                 translationYAnimator(
                                         0f,
-                                        getItemOvershootTransitionYValue(context),
+                                        getItemOvershootTransitionYValue(context,false),
                                         7 * KEY_FRAME_IN_MS,
                                         interpolators[0]),
                                 translationYAnimator(
-                                        getItemOvershootTransitionYValue(context),
-                                        getItemTransitionYValue(context),
+                                        getItemOvershootTransitionYValue(context,false),
+                                        getItemTransitionYValue(context,false),
                                         3 * KEY_FRAME_IN_MS,
                                         interpolators[4]))
                         startDelay = 11 * KEY_FRAME_IN_MS
@@ -63,12 +63,12 @@ internal class TitleView @JvmOverloads constructor(context: Context,
                     .apply {
                         playSequentially(
                                 translationYAnimator(
-                                        getItemTransitionYValue(context),
-                                        getItemOvershootTransitionYValue(context),
+                                        getItemTransitionYValue(context,false),
+                                        getItemOvershootTransitionYValue(context,false),
                                         3 * KEY_FRAME_IN_MS,
                                         interpolators[4]),
                                 translationYAnimator(
-                                        getItemOvershootTransitionYValue(context),
+                                        getItemOvershootTransitionYValue(context,false),
                                         0f,
                                         11 * KEY_FRAME_IN_MS,
                                         interpolators[0]))

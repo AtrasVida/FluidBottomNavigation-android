@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="fluidBottomNavigationHeight">56dp</dimen>
+    <dimen name="fluidBottomNavigationHeightInsideMode">64dp</dimen>
     <dimen name="fluidBottomNavigationHeightWithOpacity">80dp</dimen>
 
     <dimen name="fluidBottomNavigationTopContainerMarginLeftRight">1dp</dimen>
@@ -8,13 +9,15 @@
 
     <dimen name="fluidBottomNavigationCircleSize">48dp</dimen>
     <dimen name="fluidBottomNavigationIconSize">24dp</dimen>
+    <dimen name="fluidBottomNavigationIconSizeInsideMode">36dp</dimen>
 
     <dimen name="fluidBottomNavigationCircleMarginTop">37dp</dimen>
     <dimen name="fluidBottomNavigationIconMarginTop">46dp</dimen>
     <dimen name="fluidBottomNavigationBackgroundMarginTop">32dp</dimen>
     <dimen name="fluidBottomNavigationRectangleMarginTop">28dp</dimen>
-    <dimen name="fluidBottomNavigationTitleMarginTop">14dp</dimen>
+    <dimen name="fluidBottomNavigationTitleMarginTop">8dp</dimen>
 
     <dimen name="fluidBottomNavigationTextSize">12sp</dimen>
     <dimen name="fluidBottomNavigationItemTranslationY">22dp</dimen>
+    <dimen name="fluidBottomNavigationItemTranslationYInsideMode">14dp</dimen>
 </resources>

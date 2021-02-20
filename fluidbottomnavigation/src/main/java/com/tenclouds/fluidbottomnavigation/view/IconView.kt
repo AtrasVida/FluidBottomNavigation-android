@@ -21,34 +21,35 @@ internal class IconView @JvmOverloads constructor(context: Context,
     var selectColor = 0
     var deselectColor = 0
 
-    override val selectAnimator by lazy {
-        AnimatorSet()
-                .apply {
-                    playTogether(
-                            selectScaleAnimator,
-                            selectMoveAnimator,
-                            selectTintAnimator)
-                    addListener(object : Animator.AnimatorListener {
-                        override fun onAnimationRepeat(animation: Animator?) = Unit
-                        override fun onAnimationEnd(animation: Animator?) = Unit
-                        override fun onAnimationCancel(animation: Animator?) = Unit
-                        override fun onAnimationStart(animation: Animator?) {
-                            deselectTintAnimator.cancel()
-                            setTintColor(selectColor)
-                        }
-                    })
-                }
-    }
+    var isInsideMode = false
 
-    override val deselectAnimator by lazy {
-        AnimatorSet()
-                .apply {
-                    playTogether(
-                            deselectScaleAnimator,
-                            deselectMoveAnimator,
-                            deselectTintAnimator)
-                }
-    }
+    override fun selectAnimator() =
+            AnimatorSet()
+                    .apply {
+                        if (isInsideMode) playTogether(selectScaleAnimator, selectTintAnimator)
+                        else
+                            playTogether(selectScaleAnimator, selectMoveAnimator, selectTintAnimator)
+
+                        addListener(object : Animator.AnimatorListener {
+                            override fun onAnimationRepeat(animation: Animator?) = Unit
+                            override fun onAnimationEnd(animation: Animator?) = Unit
+                            override fun onAnimationCancel(animation: Animator?) = Unit
+                            override fun onAnimationStart(animation: Animator?) {
+                                deselectTintAnimator.cancel()
+                                setTintColor(selectColor)
+                            }
+                        })
+                    }
+
+
+    override fun deselectAnimator() =
+            AnimatorSet()
+                    .apply {
+                        if (isInsideMode) playTogether(deselectScaleAnimator, deselectTintAnimator)
+                        else
+                            playTogether(deselectScaleAnimator, deselectMoveAnimator, deselectTintAnimator)
+                    }
+
 
     private val selectScaleAnimator =
             AnimatorSet()
@@ -65,12 +66,12 @@ internal class IconView @JvmOverloads constructor(context: Context,
                         playSequentially(
                                 translationYAnimator(
                                         0f,
-                                        getItemOvershootTransitionYValue(context),
+                                        getItemOvershootTransitionYValue(context, isInsideMode),
                                         7 * KEY_FRAME_IN_MS,
                                         interpolators[0]),
                                 translationYAnimator(
-                                        getItemOvershootTransitionYValue(context),
-                                        getItemTransitionYValue(context),
+                                        getItemOvershootTransitionYValue(context, isInsideMode),
+                                        getItemTransitionYValue(context, isInsideMode),
                                         3 * KEY_FRAME_IN_MS,
                                         interpolators[4]))
                         startDelay = 11 * KEY_FRAME_IN_MS
@@ -100,12 +101,12 @@ internal class IconView @JvmOverloads constructor(context: Context,
                     .apply {
                         playSequentially(
                                 translationYAnimator(
-                                        getItemTransitionYValue(context),
-                                        getItemOvershootTransitionYValue(context),
+                                        getItemTransitionYValue(context, isInsideMode),
+                                        getItemOvershootTransitionYValue(context, isInsideMode),
                                         3 * KEY_FRAME_IN_MS,
                                         interpolators[4]),
                                 translationYAnimator(
-                                        getItemOvershootTransitionYValue(context),
+                                        getItemOvershootTransitionYValue(context, isInsideMode),
                                         0f,
                                         7 * KEY_FRAME_IN_MS,
                                         interpolators[0]))

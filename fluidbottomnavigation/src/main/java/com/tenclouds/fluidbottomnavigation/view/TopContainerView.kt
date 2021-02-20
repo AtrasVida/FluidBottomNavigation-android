@@ -21,23 +21,23 @@ internal class TopContainerView @JvmOverloads constructor(context: Context,
         translationY = 100f
     }
 
-    override val selectAnimator by lazy {
+    override fun selectAnimator ()=
         AnimatorSet()
                 .apply {
                     playTogether(
                             selectScaleAnimator,
                             selectMoveAnimator)
                 }
-    }
 
-    override val deselectAnimator by lazy {
+
+    override fun deselectAnimator ()=
         AnimatorSet()
                 .apply {
                     playTogether(
                             deselectScaleAnimator,
                             deselectMoveAnimator)
                 }
-    }
+
 
     private val selectScaleAnimator =
             AnimatorSet()
@@ -54,7 +54,7 @@ internal class TopContainerView @JvmOverloads constructor(context: Context,
                     .apply {
                         play(translationYAnimator(
                                 100f,
-                                getItemTransitionYValue(context),
+                                getItemTransitionYValue(context, false),
                                 7 * KEY_FRAME_IN_MS,
                                 interpolators[0]))
                         startDelay = 12 * KEY_FRAME_IN_MS
@@ -73,14 +73,14 @@ internal class TopContainerView @JvmOverloads constructor(context: Context,
             AnimatorSet()
                     .apply {
                         play(translationYAnimator(
-                                getItemTransitionYValue(context),
+                                getItemTransitionYValue(context, false),
                                 100f,
                                 10 * KEY_FRAME_IN_MS,
                                 interpolators[0]))
                         startDelay = 8 * KEY_FRAME_IN_MS
                     }
 
-    override fun getItemTransitionYValue(context: Context): Float {
-        return -super.getItemTransitionYValue(context) * 1 / 6
+    override fun getItemTransitionYValue(context: Context, isInsideMode: Boolean): Float {
+        return -super.getItemTransitionYValue(context, isInsideMode) * 1 / 6
     }
 }

@@ -11,49 +11,49 @@ import com.tenclouds.fluidbottomnavigation.extension.scaleYAnimator
 import com.tenclouds.fluidbottomnavigation.extension.translationYAnimator
 
 internal class RectangleView @JvmOverloads constructor(context: Context,
-                                              attrs: AttributeSet? = null,
-                                              defStyleAttr: Int = 0)
+                                                       attrs: AttributeSet? = null,
+                                                       defStyleAttr: Int = 0)
     : AppCompatImageView(context, attrs, defStyleAttr), AnimatedView {
 
     init {
         scaleY = 0f
     }
 
-    override val selectAnimator by lazy {
-        AnimatorSet()
-                .apply {
-                    playTogether(
-                            selectScaleAnimator,
-                            selectMoveAnimator)
-                    addListener(object : Animator.AnimatorListener {
-                        override fun onAnimationRepeat(animation: Animator?) = Unit
-                        override fun onAnimationEnd(animation: Animator?) = Unit
-                        override fun onAnimationCancel(animation: Animator?) = Unit
-                        override fun onAnimationStart(animation: Animator?) {
-                            deselectMoveAnimator.cancel()
-                            deselectScaleAnimator.cancel()
-                            scaleY = 0f
-                        }
-                    })
-                }
-    }
+    override fun selectAnimator() =
+            AnimatorSet()
+                    .apply {
+                        playTogether(
+                                selectScaleAnimator,
+                                selectMoveAnimator)
+                        addListener(object : Animator.AnimatorListener {
+                            override fun onAnimationRepeat(animation: Animator?) = Unit
+                            override fun onAnimationEnd(animation: Animator?) = Unit
+                            override fun onAnimationCancel(animation: Animator?) = Unit
+                            override fun onAnimationStart(animation: Animator?) {
+                                deselectMoveAnimator.cancel()
+                                deselectScaleAnimator.cancel()
+                                scaleY = 0f
+                            }
+                        })
+                    }
 
-    override val deselectAnimator by lazy {
-        AnimatorSet()
-                .apply {
-                    playTogether(
-                            deselectScaleAnimator,
-                            deselectMoveAnimator)
-                    addListener(object : Animator.AnimatorListener {
-                        override fun onAnimationRepeat(animation: Animator?) = Unit
-                        override fun onAnimationEnd(animation: Animator?) = Unit
-                        override fun onAnimationCancel(animation: Animator?) = Unit
-                        override fun onAnimationStart(animation: Animator?) {
-                            selectAnimator.cancel()
-                        }
-                    })
-                }
-    }
+
+    override fun deselectAnimator() =
+            AnimatorSet()
+                    .apply {
+                        playTogether(
+                                deselectScaleAnimator,
+                                deselectMoveAnimator)
+                        addListener(object : Animator.AnimatorListener {
+                            override fun onAnimationRepeat(animation: Animator?) = Unit
+                            override fun onAnimationEnd(animation: Animator?) = Unit
+                            override fun onAnimationCancel(animation: Animator?) = Unit
+                            override fun onAnimationStart(animation: Animator?) {
+                                selectAnimator().cancel()
+                            }
+                        })
+                    }
+
 
     private val selectScaleAnimator =
             AnimatorSet()
@@ -70,7 +70,7 @@ internal class RectangleView @JvmOverloads constructor(context: Context,
                         play(
                                 translationYAnimator(
                                         0f,
-                                        getItemTransitionYValue(context),
+                                        getItemTransitionYValue(context, false),
                                         5 * KEY_FRAME_IN_MS,
                                         interpolators[1]))
                         startDelay = 14 * KEY_FRAME_IN_MS
@@ -98,5 +98,5 @@ internal class RectangleView @JvmOverloads constructor(context: Context,
                     }
 
     private fun getItemDeselectTransitionYValue(context: Context) =
-            getItemTransitionYValue(context) * 3 / 5
+            getItemTransitionYValue(context, false) * 3 / 5
 }

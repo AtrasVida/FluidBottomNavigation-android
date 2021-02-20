@@ -21,4 +21,5 @@
     <color name="colorFadedOrange">#f0b06b</color>
     <color name="colorGreen">#189629</color>
     <color name="colorFullAlpha">#00000000</color>
+    <color name="tealBlue">#069aa8</color>
 </resources>

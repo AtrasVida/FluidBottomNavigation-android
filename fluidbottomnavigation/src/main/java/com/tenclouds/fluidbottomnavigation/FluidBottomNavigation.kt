@@ -48,6 +48,8 @@ class FluidBottomNavigation : FrameLayout {
             drawLayout()
         }
 
+    var isInsideMode = false
+
     var onTabSelectedListener: OnTabSelectedListener? = null
 
     var accentColor: Int = ContextCompat.getColor(context, R.color.accentColor)
@@ -92,8 +94,8 @@ class FluidBottomNavigation : FrameLayout {
         if (position == selectedTabPosition) return
 
         if (views.size > 0) {
-            views[selectedTabPosition].animateDeselectItemView()
-            views[position].animateSelectItemView()
+            views[selectedTabPosition].animateDeselectItemView(isInsideMode)
+            views[position].animateSelectItemView(isInsideMode)
         }
 
         this.selectedTabPosition = position
@@ -157,11 +159,11 @@ class FluidBottomNavigation : FrameLayout {
 
     }
 
-   public fun setItemNotification(itemPosition: Int, notifCunt: Int?) {
+    public fun setItemNotification(itemPosition: Int, notifCunt: Int?) {
         if (notifCunt != null) {
-           views[itemPosition]. notif.text = "" + notifCunt
+            views[itemPosition].notif.text = "" + notifCunt
             views[itemPosition].notif.visibility = View.VISIBLE
-        } else  views[itemPosition]. notif.visibility = View.GONE
+        } else views[itemPosition].notif.visibility = View.GONE
     }
 
     private fun drawItemsViews(linearLayout: LinearLayout) {
@@ -175,7 +177,7 @@ class FluidBottomNavigation : FrameLayout {
         val itemViewWidth = (bottomBarWidth / items.size)
 
         for (itemPosition in items.indices) {
-            inflater.inflate(R.layout.item, this, false)
+            inflater.inflate(if (isInsideMode) R.layout.item_inside else R.layout.item, this, false)
                     .let {
                         views.add(it)
                         linearLayout.addView(it, LayoutParams(itemViewWidth, itemViewHeight.toInt()))
@@ -190,19 +192,10 @@ class FluidBottomNavigation : FrameLayout {
 
         with(view) {
             if (items.size > 3) {
-                container.setPadding(0, 0, 0, container.paddingBottom)
+                //container.setPadding(0, 0, 0, container.paddingBottom)
             }
 
-            with(icon) {
-                selectColor = iconSelectedColor
-                deselectColor = iconColor
 
-                setImageDrawable(item.drawable)
-                if (selectedTabPosition == position)
-                    views[position].animateSelectItemView()
-                else
-                    setTintColor(deselectColor)
-            }
             with(title) {
                 typeface = textFont
                 setTextColor(this@FluidBottomNavigation.textColor)
@@ -212,21 +205,34 @@ class FluidBottomNavigation : FrameLayout {
                         resources.getDimension(R.dimen.fluidBottomNavigationTextSize))
             }
             with(circle) {
+                isInsideMode = this@FluidBottomNavigation.isInsideMode
                 setTintColor(selectorColor)
                 setBackgroundResource(selectorBg)
             }
+            if (!isInsideMode)
             with(rectangle) {
                 setTintColor(selectorColor)
                 setBackgroundResource(selectorBg)
             }
+            with(icon) {
+                selectColor = iconSelectedColor
+                deselectColor = iconColor
+                isInsideMode = this@FluidBottomNavigation.isInsideMode
 
+                setImageDrawable(item.drawable)
+                if (selectedTabPosition == position)
+                    views[position].animateSelectItemView(isInsideMode)
+                else
+                    setTintColor(deselectColor)
+            }
             val unwrappedDrawable = AppCompatResources.getDrawable(context, R.drawable.top)
             val wrappedDrawable = DrawableCompat.wrap(unwrappedDrawable!!)
             //DrawableCompat.setTint(wrappedDrawable, selectorColor)
 
             //topContainer.setBackgroundColor(backColor)
-            backgroundContainer.setBackgroundResource(itemBackRes)
-            backgroundContainer.setOnClickListener {
+
+            //if (!isInsideMode) backgroundContainer.setBackgroundResource(itemBackRes)
+            setOnClickListener {
                 //todo
                 val nowTimestamp = SystemClock.uptimeMillis()
                 if (abs(lastItemClickTimestamp - nowTimestamp) > ITEMS_CLICKS_DEBOUNCE) {

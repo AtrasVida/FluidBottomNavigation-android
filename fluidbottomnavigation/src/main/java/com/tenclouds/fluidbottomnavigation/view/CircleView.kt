@@ -44,9 +44,10 @@ internal class CircleView @JvmOverloads constructor(context: Context,
                     .apply {
                         playSequentially(
                                 scaleAnimator(0.0f, 1.0f, 7 * KEY_FRAME_IN_MS, interpolators[0]),
-                                scaleAnimator(1.0f, 0.33f, 4 * KEY_FRAME_IN_MS, interpolators[2]),
-                                scaleAnimator(0.33f, 1.2f, 7 * KEY_FRAME_IN_MS, interpolators[1]),
-                                scaleAnimator(1.2f, 0.8f, 3 * KEY_FRAME_IN_MS, interpolators[1]),
+                                //scaleAnimator(1.0f, 0.33f, 4 * KEY_FRAME_IN_MS, interpolators[2]),
+                                //scaleAnimator(0.33f, 1.2f, 7 * KEY_FRAME_IN_MS, interpolators[1]),
+                                scaleAnimator(1.0f, 0.8f, 7 * KEY_FRAME_IN_MS, interpolators[1]),
+                                //scaleAnimator(1.2f, 0.8f, 3 * KEY_FRAME_IN_MS, interpolators[1]),
                                 scaleAnimator(0.8f, if (isInsideMode) 1.1f else 1.0f, 3 * KEY_FRAME_IN_MS, interpolators[1]))
                     }
 
@@ -71,11 +72,12 @@ internal class CircleView @JvmOverloads constructor(context: Context,
             AnimatorSet()
                     .apply {
                         playSequentially(
-                                scaleAnimator(1.0f, 0.8f, 3 * KEY_FRAME_IN_MS, interpolators[1]),
-                                scaleAnimator(0.8f, 1.2f, 3 * KEY_FRAME_IN_MS, interpolators[1]),
-                                scaleAnimator(1.2f, 0.33f, 7 * KEY_FRAME_IN_MS, interpolators[1]),
-                                scaleAnimator(0.33f, 1.0f, 6 * KEY_FRAME_IN_MS, interpolators[2]),
-                                scaleAnimator(1.0f, 0.0f, 7 * KEY_FRAME_IN_MS, interpolators[0]))
+                                //scaleAnimator(1.0f, 0.8f, 3 * KEY_FRAME_IN_MS, interpolators[1]),
+                                //scaleAnimator(0.8f, 1.2f, 3 * KEY_FRAME_IN_MS, interpolators[1]),
+                                //scaleAnimator(1.2f, 0.33f, 7 * KEY_FRAME_IN_MS, interpolators[1]),
+                                //scaleAnimator(0.33f, 1.0f, 6 * KEY_FRAME_IN_MS, interpolators[2]),
+                                //scaleAnimator(1.0f, 0.0f, 7 * KEY_FRAME_IN_MS, interpolators[0]))
+                                scaleAnimator(if (isInsideMode) 1.1f else 1.0f, 0.0f, 7 * KEY_FRAME_IN_MS, interpolators[0]))
                     }
 
     private fun deselectMoveAnimator() =

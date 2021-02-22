@@ -13,7 +13,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        //fluidBottomNavigation.isInsideMode = true
+        fluidBottomNavigation.isInsideMode = true
         fluidBottomNavigation.accentColor = ContextCompat.getColor(this, R.color.colorWhite)
         //fluidBottomNavigation.backRes = R.drawable.fluidbottomnavigationexample_shadow32dpi3
         fluidBottomNavigation.itemBackRes = ContextCompat.getColor(this, R.color.colorFullAlpha)//R.drawable.bottom_navigation_bg

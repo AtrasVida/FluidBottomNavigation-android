@@ -26,7 +26,7 @@ internal class IconView @JvmOverloads constructor(context: Context,
     override fun selectAnimator() =
             AnimatorSet()
                     .apply {
-                        if (isInsideMode) playTogether(selectScaleAnimator, selectTintAnimator)
+                        if (isInsideMode) playTogether( selectTintAnimator)
                         else
                             playTogether(selectScaleAnimator, selectMoveAnimator, selectTintAnimator)
 
@@ -45,7 +45,7 @@ internal class IconView @JvmOverloads constructor(context: Context,
     override fun deselectAnimator() =
             AnimatorSet()
                     .apply {
-                        if (isInsideMode) playTogether(deselectScaleAnimator, deselectTintAnimator)
+                        if (isInsideMode) playTogether( deselectTintAnimator)
                         else
                             playTogether(deselectScaleAnimator, deselectMoveAnimator, deselectTintAnimator)
                     }

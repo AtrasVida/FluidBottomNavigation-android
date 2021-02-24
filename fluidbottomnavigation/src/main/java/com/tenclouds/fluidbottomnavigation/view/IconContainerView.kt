@@ -5,9 +5,10 @@ import android.animation.AnimatorSet
 import android.content.Context
 import android.util.AttributeSet
 import android.widget.LinearLayout
-import androidx.appcompat.widget.AppCompatImageView
 import com.tenclouds.fluidbottomnavigation.KEY_FRAME_IN_MS
-import com.tenclouds.fluidbottomnavigation.extension.*
+import com.tenclouds.fluidbottomnavigation.extension.interpolators
+import com.tenclouds.fluidbottomnavigation.extension.scaleAnimator
+import com.tenclouds.fluidbottomnavigation.extension.translationYAnimator
 
 internal class IconContainerView @JvmOverloads constructor(context: Context,
                                                            attrs: AttributeSet? = null,
@@ -22,8 +23,8 @@ internal class IconContainerView @JvmOverloads constructor(context: Context,
     var selectColor = 0
     var deselectColor = 0
 
-    override fun selectAnimator () :Animator {
-       return AnimatorSet()
+    override fun selectAnimator(): Animator {
+        return AnimatorSet()
                 .apply {
                     playTogether(
                             selectScaleAnimator,
@@ -38,7 +39,7 @@ internal class IconContainerView @JvmOverloads constructor(context: Context,
                 }
     }
 
-    override fun deselectAnimator () :Animator {
+    override fun deselectAnimator(): Animator {
         return AnimatorSet()
                 .apply {
                     playTogether(
@@ -51,9 +52,9 @@ internal class IconContainerView @JvmOverloads constructor(context: Context,
             AnimatorSet()
                     .apply {
                         playSequentially(
-                                scaleAnimator(0.9f, 1.1f, 7 * KEY_FRAME_IN_MS, interpolators[0]),
-                                scaleAnimator(1.1f, 0.84f, 4 * KEY_FRAME_IN_MS, interpolators[0]),
-                                scaleAnimator(0.84f, 1.0f, 4 * KEY_FRAME_IN_MS, interpolators[3]))
+                                //scaleAnimator(0.9f, 1.1f, 7 * KEY_FRAME_IN_MS, interpolators[0]),
+                                //scaleAnimator(1.1f, 0.84f, 4 * KEY_FRAME_IN_MS, interpolators[0]),
+                                scaleAnimator(0.9f, 1.0f, 4 * KEY_FRAME_IN_MS, interpolators[3]))
                     }
 
     private val selectMoveAnimator =
@@ -62,12 +63,12 @@ internal class IconContainerView @JvmOverloads constructor(context: Context,
                         playSequentially(
                                 translationYAnimator(
                                         0f,
-                                        getItemOvershootTransitionYValue(context,true),
+                                        getItemOvershootTransitionYValue(context, true),
                                         7 * KEY_FRAME_IN_MS,
                                         interpolators[0]),
                                 translationYAnimator(
-                                        getItemOvershootTransitionYValue(context,true),
-                                        getItemTransitionYValue(context,true),
+                                        getItemOvershootTransitionYValue(context, true),
+                                        getItemTransitionYValue(context, true),
                                         3 * KEY_FRAME_IN_MS,
                                         interpolators[4]))
                         startDelay = 11 * KEY_FRAME_IN_MS
@@ -78,9 +79,11 @@ internal class IconContainerView @JvmOverloads constructor(context: Context,
             AnimatorSet()
                     .apply {
                         playSequentially(
-                                scaleAnimator(1.0f, 0.84f, 4 * KEY_FRAME_IN_MS, interpolators[3]),
-                                scaleAnimator(0.84f, 1.1f, 4 * KEY_FRAME_IN_MS, interpolators[0]),
-                                scaleAnimator(1.1f, 0.9f, 7 * KEY_FRAME_IN_MS, interpolators[0]))
+                                scaleAnimator(1.0f, 0.9f, 4 * KEY_FRAME_IN_MS, interpolators[3])//,
+                                //scaleAnimator(0.84f, 1.1f, 4 * KEY_FRAME_IN_MS, interpolators[0]),
+                                //scaleAnimator(1.1f, 0.9f, 7 * KEY_FRAME_IN_MS, interpolators[0])
+                        )
+
                     }
 
     private val deselectMoveAnimator =
@@ -88,12 +91,12 @@ internal class IconContainerView @JvmOverloads constructor(context: Context,
                     .apply {
                         playSequentially(
                                 translationYAnimator(
-                                        getItemTransitionYValue(context,true),
-                                        getItemOvershootTransitionYValue(context,true),
+                                        getItemTransitionYValue(context, true),
+                                        getItemOvershootTransitionYValue(context, true),
                                         3 * KEY_FRAME_IN_MS,
                                         interpolators[4]),
                                 translationYAnimator(
-                                        getItemOvershootTransitionYValue(context,true),
+                                        getItemOvershootTransitionYValue(context, true),
                                         0f,
                                         7 * KEY_FRAME_IN_MS,
                                         interpolators[0]))

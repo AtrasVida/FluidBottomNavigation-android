@@ -3,4 +3,4 @@ package com.tenclouds.fluidbottomnavigation
 import android.graphics.drawable.Drawable
 
 data class FluidBottomNavigationItem(val title: String,
-                                     val drawable: Drawable? = null)
+                                     val drawable: Drawable? = null, val isEnable: Boolean)

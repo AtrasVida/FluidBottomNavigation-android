@@ -234,11 +234,12 @@ class FluidBottomNavigation : FrameLayout {
             //if (!isInsideMode) backgroundContainer.setBackgroundResource(itemBackRes)
             setOnClickListener {
                 //todo
+                if (item.isEnable){
                 val nowTimestamp = SystemClock.uptimeMillis()
                 if (abs(lastItemClickTimestamp - nowTimestamp) > ITEMS_CLICKS_DEBOUNCE) {
                     selectTab(position)
                     lastItemClickTimestamp = nowTimestamp
-                }
+                }}
             }
         }
     }

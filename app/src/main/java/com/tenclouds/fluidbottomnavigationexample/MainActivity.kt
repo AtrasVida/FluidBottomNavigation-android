@@ -30,19 +30,19 @@ class MainActivity : AppCompatActivity() {
                 listOf(
                         FluidBottomNavigationItem(
                                 getString(R.string.news),
-                                ContextCompat.getDrawable(this, R.drawable.ic_news)),
+                                ContextCompat.getDrawable(this, R.drawable.ic_news),true),
                         FluidBottomNavigationItem(
                                 getString(R.string.inbox),
-                                ContextCompat.getDrawable(this, R.drawable.ic_inbox)),
+                                ContextCompat.getDrawable(this, R.drawable.ic_inbox),true),
                         FluidBottomNavigationItem(
                                 getString(R.string.calendar),
-                                ContextCompat.getDrawable(this, R.drawable.ic_calendar)),
+                                ContextCompat.getDrawable(this, R.drawable.ic_calendar),false),
                         FluidBottomNavigationItem(
                                 getString(R.string.chat),
-                                ContextCompat.getDrawable(this, R.drawable.ic_chat)),
+                                ContextCompat.getDrawable(this, R.drawable.ic_chat),true),
                         FluidBottomNavigationItem(
                                 getString(R.string.profile),
-                                ContextCompat.getDrawable(this, R.drawable.ic_profile)))
+                                ContextCompat.getDrawable(this, R.drawable.ic_profile),true))
 
         Handler().postDelayed({ fluidBottomNavigation.setItemNotification(3,5)},5000)
 
